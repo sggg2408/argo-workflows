@@ -33,16 +33,10 @@ jobs:
         docker tag $ECR_REPO:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$ECR_REPO:latest
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$ECR_REPO:latest
 
-    - name: Install Argo CLI
-      run: |
-       curl -sLO https://github.com/argoproj/argo-workflows/releases/download/v3.6.2/argo-linux-amd64.gz
-       gunzip argo-linux-amd64.gz
-       chmod +x argo-linux-amd64
-       mv ./argo-linux-amd64 /usr/local/bin/argo
-
     - name: Submit Argo Workflow
       run: |
-        curl -sLO https://github.com/argoproj/argo-workflows/releases/latest/download/argo-linux-amd64
+        curl -sLO https://github.com/argoproj/argo-workflows/releases/download/v3.6.2/argo-linux-amd64.gz
+        gunzip argo-linux-amd64.gz
         chmod +x argo-linux-amd64 && mv argo-linux-amd64 /usr/local/bin/argo
         aws eks update-kubeconfig --region $AWS_REGION --name ${{ secrets.EKS_CLUSTER_NAME }}
         argo submit -n argo argo-metaflow.yaml --serviceaccount argo --watch
