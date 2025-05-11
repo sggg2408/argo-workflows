@@ -48,4 +48,8 @@ jobs:
         chmod +x argo-linux-amd64 && mv argo-linux-amd64 /usr/local/bin/argo
         aws eks update-kubeconfig --region $AWS_REGION --name ${{ secrets.EKS_CLUSTER_NAME }}
         argo submit -n argo argo-metaflow.yaml --serviceaccount argo --watch
-
+        
+    - name: Show Argo Workflow Logs
+      run: |
+        echo "Fetching logs for: ${{ env.workflow_name }}"
+        argo logs -n argo ${{ env.workflow_name }} || echo "Workflow may not have logs or failed early."
