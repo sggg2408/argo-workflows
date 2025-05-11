@@ -53,4 +53,5 @@ jobs:
     - name: Show Argo Workflow Logs
       run: |
         echo "Fetching logs for: $workflow_name"
+        argo logs -n argo @latest
         argo logs -n argo "$workflow_name" || echo "Workflow may not have logs or failed early."
