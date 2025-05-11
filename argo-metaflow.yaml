@@ -1,1 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: metaflow-
+spec:
+  entrypoint: metaflow-run
+  serviceAccountName: argo
+  templates:
+  - name: metaflow-run
+    container:
+      image: ${{ AWS_ACCOUNT_ID }}.dkr.ecr.ap-south-1.amazonaws.com/metaflow-argo:latest
+      command: ["python"]
+      args: ["flow.py", "run"]
 
