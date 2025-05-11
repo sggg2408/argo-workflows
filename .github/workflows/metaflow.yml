@@ -5,7 +5,7 @@ on:
 
 env:
   AWS_REGION: ap-southeast-1
-  ECR_REPO: <your-ecr-repo-name>
+  ECR_REPO: metaflow-argo
 
 jobs:
   build-and-push:
