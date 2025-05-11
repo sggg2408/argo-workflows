@@ -11,4 +11,7 @@ spec:
       image: 282052313230.dkr.ecr.ap-south-1.amazonaws.com/metaflow-argo:latest
       command: ["python"]
       args: ["flow.py", "run"]
+      env:
+        - name: USER
+          value: github-runner
 
