@@ -30,8 +30,8 @@ jobs:
     - name: Build & Push Docker image
       run: |
         docker build -t $ECR_REPO .
-        docker tag $ECR_REPO:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$ECR_REPO:latest
-        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$ECR_REPO:latest
+        docker tag $ECR_REPO:latest 282052313230.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest
+        docker push 282052313230.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest
 
     - name: Submit Argo Workflow
       run: |
