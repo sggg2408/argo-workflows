@@ -10,4 +10,4 @@ spec:
     container:
       image: docker/whalesay:latest
       command: [cowsay]
-      args: ["Hello from GitHub Actions + Argo on EKS!"]
+      args: ["Hello from GitHub Actions + Argo on EKS! by SHUBHAM"]
