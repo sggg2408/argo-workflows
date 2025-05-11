@@ -8,7 +8,7 @@ spec:
   templates:
   - name: metaflow-run
     container:
-      image: ${{ AWS_ACCOUNT_ID }}.dkr.ecr.ap-south-1.amazonaws.com/metaflow-argo:latest
+      image: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-south-1.amazonaws.com/metaflow-argo:latest
       command: ["python"]
       args: ["flow.py", "run"]
 
