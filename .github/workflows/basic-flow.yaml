@@ -1,18 +1,18 @@
-name: Submit Argo Workflow to EKS
+name: Submit Metaflow to Argo
 
 on:
   workflow_dispatch:
 
 jobs:
-  submit-argo:
+  run-metaflow-on-argo:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4.1.0
+    - name: Set up AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -24,12 +24,11 @@ jobs:
 
     - name: Install Argo CLI
       run: |
-        curl -sLO https://github.com/argoproj/argo-workflows/releases/download/v3.4.4/argo-linux-amd64.gz
-        gunzip argo-linux-amd64.gz
+        curl -sLO https://github.com/argoproj/argo-workflows/releases/latest/download/argo-linux-amd64
         chmod +x argo-linux-amd64
         sudo mv argo-linux-amd64 /usr/local/bin/argo
+        argo version
 
     - name: Submit Argo Workflow
       run: |
         argo submit -n argo workflow.yaml --serviceaccount argo --watch
-
