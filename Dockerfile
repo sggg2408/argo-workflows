@@ -5,5 +5,5 @@ RUN pip install metaflow boto3
 WORKDIR /app
 COPY analyticsUpdateJob.py .
 
-ENTRYPOINT ["python", "flow.py", "run"]
+ENTRYPOINT ["python", "analyticsUpdateJob.py", "run"]
 
