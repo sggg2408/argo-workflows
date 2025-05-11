@@ -31,4 +31,5 @@ jobs:
 
     - name: Submit Argo Workflow
       run: |
-        argo submit -n argo workflow.yaml --watch
+        argo submit -n argo workflow.yaml --serviceaccount argo --watch
+
