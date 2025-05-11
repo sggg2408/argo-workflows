@@ -24,4 +24,4 @@ jobs:
 
     - name: Submit Argo Workflow
       run: |
-        kubectl apply -n argo -f workflow.yaml
+        kubectl create -n argo -f workflow.yaml
