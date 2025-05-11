@@ -26,6 +26,15 @@ jobs:
       run: |
         aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 282052313230.dkr.ecr.ap-south-1.amazonaws.com
 
+    - name: Delete existing ECR images
+      run: |
+        IMAGE_IDS=$(aws ecr list-images --repository-name $ECR_REPO --query 'imageIds[*]' --output json)
+        if [ "$IMAGE_IDS" != "[]" ]; then
+          aws ecr batch-delete-image --repository-name $ECR_REPO --image-ids "$IMAGE_IDS"
+        else
+          echo "No images found to delete."
+        fi
+        
     - name: Build & Push Docker image
       run: |
         docker build -t $ECR_REPO .
